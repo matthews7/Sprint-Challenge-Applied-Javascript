@@ -21,34 +21,41 @@
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
     .then(response => {
-        console.log(response);
+        for (const value in response.data.articles){
+            const one = response.data.articles[value];
+            for (const element in one) {
+                const two = one[element]
+                console.log(two)
+                const newCard = Articles(two)
+                cardEntry.append(newCard)
+            }
+        }
     }) 
     
 
-// function Articles (item){
-//     const cardCont = document.createElement('div');
-//     const cardTitle = document.createElement('div');
-//     const cardAuth = document.createElement('div');
-//     const cardImgCon = document.createElement('div');
-//     const cardImg = document.createElement('img');
-//     const cardName = document.createElement('span');
+function Articles (item){
+    const cardCont = document.createElement('div');
+    const cardTitle = document.createElement('div');
+    const cardAuth = document.createElement('div');
+    const cardImgCon = document.createElement('div');
+    const cardImg = document.createElement('img');
+    const cardName = document.createElement('span');
 
-//     cardCont.classList.add('card');
-//     cardTitle.classList.add('headline');
-//     cardAuth.classList.add('author');
-//     cardImgCon.classList.add('img-container');
+    cardCont.classList.add('card');
+    cardTitle.classList.add('headline');
+    cardAuth.classList.add('author');
+    cardImgCon.classList.add('img-container');
 
-//     cardTitle.textContent = item.headline
-//     cardImg.src = item.authorPhoto
-//     cardName.textContent = item.authorName
+    cardTitle.textContent = item.headline
+    cardImg.src = item.authorPhoto
+    cardName.textContent = item.authorName
 
-//     cardCont.append(cardTitle, cardAuth,)
-//     cardAuth.append(cardImgCon, cardName)
-//     cardImgCon.append(cardImg)
+    cardCont.append(cardTitle, cardAuth,)
+    cardAuth.append(cardImgCon, cardName)
+    cardImgCon.append(cardImg)
 
 
-//     return cardCont
-// }
+    return cardCont;
+}
 
-// const cardEntry = document.querySelector('.cards-container');
-// cardEntry.append(Articles())
+const cardEntry = document.querySelector('.cards-container');
